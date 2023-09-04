@@ -1,4 +1,4 @@
-package com.SEA.Cadastramento.telefone;
+package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -7,18 +7,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name= "telefones")
-@Entity(name="telefones")
-
-public class Telefone {
+@Table(name= "enderecos")
+@Entity(name="enderecos")
+public class Endereco {
+    //public User user;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String type;
+    /*public void setId(Long id) {
+        this.id = user.getId();
+    }*/
 
     @NotBlank
-    private String number;
+    private String cep;
 
 }

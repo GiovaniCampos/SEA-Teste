@@ -1,4 +1,4 @@
-package com.SEA.Cadastramento.cpf;
+package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,9 +9,15 @@ import lombok.Getter;
 @Table(name= "cpfs")
 @Entity(name="cpfs")
 public class CPF {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
     private Long id;
+
+    /*public User user;
+    public void setId(Long id) {
+        this.id = user.getId();
+    }*/
 
     @NotBlank
     @Pattern(regexp = "\\d{11}")

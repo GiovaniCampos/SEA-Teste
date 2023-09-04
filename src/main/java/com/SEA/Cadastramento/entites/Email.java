@@ -1,4 +1,4 @@
-package com.SEA.Cadastramento.email;
+package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -16,8 +16,17 @@ public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    //@JoinColumn(name = "user_id")
+    private User user;
+
     @NotBlank
     private String address;
+
+    public Email(String mail) {
+    }
+
 
     public boolean isValidEmailAddress() {
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";

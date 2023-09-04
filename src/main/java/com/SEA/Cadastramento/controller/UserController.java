@@ -1,12 +1,13 @@
 package com.SEA.Cadastramento.controller;
 
-import com.SEA.Cadastramento.user.User;
-import com.SEA.Cadastramento.user.UserRepository;
+import com.SEA.Cadastramento.entites.User;
+import com.SEA.Cadastramento.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,16 +23,34 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @PostMapping
-    public ResponseEntity<String> saveUser(@RequestBody User data){
-        Long id = data.getId();
-        String username = data.getUsername();
-        String password = data.getPassword();
-        String role = data.getRole();
-        repository.save(data);
-        return ResponseEntity.ok("Created Sucessfuly");
+    @RequestMapping(value="/saveUser", method = RequestMethod.POST)
+    /*public void saveUser(HttpServletRequest request){
+        try {
+            // Obter os dados do corpo da solicitação aqui
+            String requestBodyData = obterDadosDoCorpoDaRequisicao(request);
+
+            // Faça o parse ou processamento dos dados conforme necessário
+            User userData = parseUserData(requestBodyData);
+
+            // Salvar a comida no repositório
+            repository.save(userData);
+        } catch (Exception e) {
+            // Lidar com exceções aqui, como log ou retornar um código de status de erro
+            // Exemplo: log.error("Ocorreu um erro ao salvar a comida.", e);
+            // return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    // Função para obter dados do corpo da solicitação (implementação dependente do framework usado)
+    private String obterDadosDoCorpoDaRequisicao(HttpServletRequest request) throws IOException {
+        // Implemente a lógica para ler os dados do corpo da solicitação
+        // Por exemplo, usando BufferedReader e request.getInputStream()
+    }
+
+    // Função para analisar os dados do corpo da solicitação e criar uma instância de Food
+    private User parseUserData(String requestBodyData) {
+        // Implemente a lógica para analisar os dados do corpo da solicitação e criar um objeto Food
+    }*/
     @GetMapping
     public List<User> getAll(){
         List<User> userList = repository.findAll();

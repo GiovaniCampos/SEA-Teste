@@ -1,4 +1,4 @@
-package com.SEA.Cadastramento.cliente;
+package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,8 +12,8 @@ import lombok.Setter;
 @Entity(name="clientes")
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @NotBlank
     @Size(min = 3, max = 100)
