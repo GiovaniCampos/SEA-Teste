@@ -2,12 +2,14 @@ package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name= "telefones")
 @Entity(name="telefones")
 
@@ -23,6 +25,6 @@ public class Telefone {
     private String type;
 
     @NotBlank
-    private String number;
+    private int number;
 
 }

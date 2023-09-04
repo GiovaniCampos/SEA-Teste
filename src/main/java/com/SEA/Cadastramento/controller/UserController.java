@@ -24,9 +24,6 @@ public class UserController {
     private UserRepository repository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
     private ClienteRepository clienteRepository;
 
     @Autowired

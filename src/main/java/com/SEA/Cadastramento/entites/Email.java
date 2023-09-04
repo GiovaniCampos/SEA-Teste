@@ -2,6 +2,7 @@ package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name= "emails")
 @Entity(name="emails")
 public class Email {

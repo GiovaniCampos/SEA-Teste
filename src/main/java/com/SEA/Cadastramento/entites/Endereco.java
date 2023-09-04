@@ -2,6 +2,7 @@ package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,17 +10,18 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name= "enderecos")
 @Entity(name="enderecos")
 public class Endereco {
-    @ManyToOne@JoinColumn(name = "user_id")
-    private User user;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne@JoinColumn(name = "user_id")
+    private User user;
     @NotBlank
-    private String cep;
+    private int cep;
 
     @NotBlank
     private String logradouro;

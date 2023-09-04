@@ -14,11 +14,6 @@ public class CPF {
     @Id
     private Long id;
 
-    /*public User user;
-    public void setId(Long id) {
-        this.id = user.getId();
-    }*/
-
     @NotBlank
     @Pattern(regexp = "\\d{11}")
     private String value;
