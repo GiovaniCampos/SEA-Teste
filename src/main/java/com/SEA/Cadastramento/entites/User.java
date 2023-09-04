@@ -7,7 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Table(name= "users")
 @Entity(name="users")
 @EqualsAndHashCode(of="id")
@@ -19,12 +18,16 @@ public class User {
     @Column(unique = true)
     private String username;
     private String password;
-    private String role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Email> emails;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-
-
+    public User(Long id, String username, String password, Role role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
 }

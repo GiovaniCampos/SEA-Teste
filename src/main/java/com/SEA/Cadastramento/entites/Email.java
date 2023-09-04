@@ -2,12 +2,14 @@ package com.SEA.Cadastramento.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Data
 @Getter
 @Setter
 @Table(name= "emails")
@@ -18,14 +20,11 @@ public class Email {
     private Long id;
 
     @ManyToOne
-    //@JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotBlank
     private String address;
-
-    public Email(String mail) {
-    }
 
 
     public boolean isValidEmailAddress() {

@@ -1,7 +1,7 @@
 package com.SEA.Cadastramento.controller;
 
-import com.SEA.Cadastramento.entites.User;
-import com.SEA.Cadastramento.repositories.UserRepository;
+import com.SEA.Cadastramento.entites.*;
+import com.SEA.Cadastramento.repositories.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,69 +23,70 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @RequestMapping(value="/saveUser", method = RequestMethod.POST)
-    /*public void saveUser(HttpServletRequest request){
-        try {
-            // Obter os dados do corpo da solicitação aqui
-            String requestBodyData = obterDadosDoCorpoDaRequisicao(request);
+    @Autowired
+    private RoleRepository roleRepository;
 
-            // Faça o parse ou processamento dos dados conforme necessário
-            User userData = parseUserData(requestBodyData);
+    @Autowired
+    private ClienteRepository clienteRepository;
 
-            // Salvar a comida no repositório
-            repository.save(userData);
-        } catch (Exception e) {
-            // Lidar com exceções aqui, como log ou retornar um código de status de erro
-            // Exemplo: log.error("Ocorreu um erro ao salvar a comida.", e);
-            // return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    @Autowired
+    private EmailRepository emailRepository;
 
-    // Função para obter dados do corpo da solicitação (implementação dependente do framework usado)
-    private String obterDadosDoCorpoDaRequisicao(HttpServletRequest request) throws IOException {
-        // Implemente a lógica para ler os dados do corpo da solicitação
-        // Por exemplo, usando BufferedReader e request.getInputStream()
-    }
+    @Autowired
+    private TelefoneRepository telefoneRepository;
 
-    // Função para analisar os dados do corpo da solicitação e criar uma instância de Food
-    private User parseUserData(String requestBodyData) {
-        // Implemente a lógica para analisar os dados do corpo da solicitação e criar um objeto Food
-    }*/
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+
     @GetMapping
     public List<User> getAll(){
         List<User> userList = repository.findAll();
         return userList;
     }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    /*@PostMapping
+    public User criarUsuario(@RequestBody UserConstructor userConstructor) {
+        // Crie um novo usuário e salve-o
+        User user = UserConstructor.getUser();
+        User savedUser = repository.save(user);
+
+        // Salve os detalhes do usuário
+        Cliente cliente = UserConstructor.getCliente();
+        Cliente.setUser(savedUser);
+        ClienteRepository.save(Cliente);
+
+        // Salve os emails
+        List<Email> userEmails = UserConstructor.getEmails();
+        userEmails.forEach(email -> email.setUser(savedUser));
+        EmailRepository.saveAll(Email);
+
+        // Salve os telefones
+        List<Telefone> userPhones = UserConstructor.getTelefones();
+        userPhones.forEach(phone -> phone.setUser(savedUser));
+        TelefoneRepository.saveAll(Telefone);
+
+        // Salve os endereços
+        List<Endereco> userAddresses = UserConstructor.getEnderecos();
+        userAddresses.forEach(address -> address.setUser(savedUser));
+        EnderecoRepository.saveAll(Endereco);
+
+        return savedUser;
+    }*/
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+        user.setId(id);
+        return repository.save(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }
-/* import com.example.cardapio.food.Food;
-import com.example.cardapio.food.FoodRepository;
-import com.example.cardapio.food.FoodRequestDTO;
-import com.example.cardapio.food.FoodResponseDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-@RestController
-@RequestMapping("food")
-public class FoodController {
-
-    @Autowired
-    private FoodRepository repository;
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping
-    public void saveFood(@RequestBody FoodRequestDTO data){
-        Food foodData = new Food(data);
-        repository.save(foodData);
-        return;
-    }
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping
-    public List<FoodResponseDTO> getAll(){
-
-        List<FoodResponseDTO> foodList = repository.findAll().stream().map(FoodResponseDTO::new).toList();
-        return foodList;
-    }
-}*/
